@@ -26,6 +26,10 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /* ✅ Prevents sideways scroll */
     background-color: var(--light);
     color: var(--dark);
     line-height: 1.7;
@@ -264,6 +268,113 @@ body {
     box-shadow: 0 8px 25px rgba(0, 128, 128, 0.3);
 }
 
+
+
+
+
+
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero p {
+        font-size: 16px;
+        max-width: 100%;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero {
+        padding: 140px 20px 80px;
+        background: linear-gradient(135deg, var(--light) 0%, var(--primary-light) 100%);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 15px 20px;
+    }
+
+    .logo img {
+        height: 35px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero::before {
+        display: none;
+    }
+
+    .hero {
+        background: linear-gradient(135deg, var(--light) 0%, var(--primary-light) 100%);
+        text-align: left;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 28px;
+        line-height: 1.3;
+    }
+
+    .hero p {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .nav-links {
+        width: 100%;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+    }
+
+    .navbar-container {
+        padding: 12px 15px;
+    }
+
+    .hero {
+        background: linear-gradient(135deg, var(--light) 0%, var(--primary-light) 100%);
+    }
+}
+
+
+
 /* Features Section */
 .features {
     padding: 80px 20px 100px;
@@ -419,11 +530,53 @@ body {
     visibility: visible;
 }
 
+.feature-card.active .ar {
+    transform: rotate(90deg);
+}
+
+
 
 
 .feature-card.active .arrow {
     transform: rotate(90deg);
 }
+
+
+@media (max-width: 600px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+        /* One column only on small screens */
+        gap: 20px;
+    }
+
+    .feature-card {
+        padding: 20px;
+        /* Less padding to fit smaller screen */
+    }
+
+    .feature-card h3 {
+        font-size: 20px;
+        /* Slightly smaller headings */
+    }
+
+    .feature-card>p,
+    .feature-content p {
+        font-size: 14px;
+        /* Slightly smaller text */
+    }
+
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+    }
+
+    .arrow-btn {
+        width: 32px;
+        height: 32px;
+    }
+}
+
 
 /* How It Works */
 .how-it-works {
@@ -1385,4 +1538,54 @@ textarea.form-control {
     margin: 0 auto;
     line-height: 1.7;
     text-align: center;
+}
+
+
+
+
+
+
+@media (max-width: 600px) {
+
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    .container,
+    .features-grid {
+        max-width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    img,
+    iframe {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .feature {
+        flex-wrap: wrap;
+        /* Allow cards to wrap onto multiple rows */
+        justify-content: center;
+        /* Center cards */
+        padding: 0 15px;
+        /* Prevent edges from touching screen */
+        box-sizing: border-box;
+    }
+
+    .feature .feature-card {
+        width: 100% !important;
+        /* Make cards full width */
+        max-width: 350px;
+        /* Optional max width for readability */
+        margin: 10px 0;
+        /* Vertical spacing between cards */
+        box-sizing: border-box;
+    }
 }
