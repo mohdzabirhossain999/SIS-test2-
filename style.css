@@ -429,13 +429,19 @@ body {
 }
 
 .feature-card {
+    display: flex;
+    /* New */
+    flex-direction: column;
+    overflow: visible;
+    /* Change from 'hidden' to 'visible' */
+    padding-bottom: 100px;
+    /* Add this - creates space for button */
+    position: relative;
     background: #fefefe;
     border-radius: 12px;
     padding: 30px 40px 50px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
     border: 1px solid #ddd;
-    position: relative;
-    overflow: hidden;
     transition: box-shadow 0.4s ease, transform 0.4s ease;
 }
 
@@ -479,6 +485,14 @@ body {
 }
 
 .feature-content {
+    flex: 1;
+    /* New - makes content grow properly */
+    margin-bottom: 60px !important;
+    /* New - massive safe area */
+    position: relative;
+    /* New */
+    z-index: 0;
+    /* Creates gap above button */
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease;
@@ -499,9 +513,14 @@ body {
 }
 
 .arrow-btn {
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
+    position: absolute !important;
+    bottom: 25px !important;
+    right: 30px !important;
+    z-index: 10 !important;
+    /* New - supreme layering */
+    transform: translateZ(10px);
+
+
     background-color: #004d4d;
     border: none;
     border-radius: 20px;
@@ -530,6 +549,23 @@ body {
     visibility: visible;
 }
 
+
+.text-with-arrow {
+    position: relative;
+    padding-right: 1.2em;
+    /* Enough space for arrow */
+}
+
+.text-with-ar::after {
+    content: "→";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1em;
+}
+
+
 .feature-card.active .ar {
     transform: rotate(90deg);
 }
@@ -541,17 +577,27 @@ body {
     transform: rotate(90deg);
 }
 
+@media (max-width: 600px) {
+    .feature-card {
+        padding-bottom: 80px !important;
+    }
+
+    .feature-content {
+        margin-bottom: 50px !important;
+    }
+
+    .arrow-btn {
+        bottom: 20px !important;
+        width: 36px !important;
+        height: 36px !important;
+    }
+}
 
 @media (max-width: 600px) {
     .features-grid {
         grid-template-columns: 1fr;
         /* One column only on small screens */
         gap: 20px;
-    }
-
-    .feature-card {
-        padding: 20px;
-        /* Less padding to fit smaller screen */
     }
 
     .feature-card h3 {
@@ -561,6 +607,7 @@ body {
 
     .feature-card>p,
     .feature-content p {
+        padding-bottom: 20px;
         font-size: 14px;
         /* Slightly smaller text */
     }
@@ -570,12 +617,8 @@ body {
         height: 50px;
         font-size: 22px;
     }
-
-    .arrow-btn {
-        width: 32px;
-        height: 32px;
-    }
 }
+
 
 
 /* How It Works */
