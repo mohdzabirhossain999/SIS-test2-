@@ -103,20 +103,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Expand/Collapse About Boxes
-document.querySelectorAll('.about-box').forEach(box => {
-    const btn = box.querySelector('.toggle-btn');
+const aboutBoxes = document.querySelectorAll('.about-box');
+
+aboutBoxes.forEach(box => {
+    const header = box.querySelector('.about-box-header');
     const content = box.querySelector('.about-box-content');
 
-    btn.addEventListener('click', () => {
-        const expanded = box.classList.toggle('expanded');
-        btn.textContent = expanded ? 'Show less' : 'Show more';
-        btn.setAttribute('aria-expanded', expanded);
-        content.setAttribute('aria-hidden', !expanded);
-    });
-
-    box.querySelector('.about-box-header').addEventListener('click', (e) => {
-        if (e.target === btn) return;
-        btn.click();
+    header.addEventListener('click', () => {
+        if (box.classList.contains('expanded')) {
+            // Collapse
+            content.style.height = content.scrollHeight + 'px'; // set fixed height to trigger transition
+            requestAnimationFrame(() => {
+                content.style.height = '0';
+            });
+            box.classList.remove('expanded');
+        } else {
+            // Expand
+            content.style.height = content.scrollHeight + 'px';
+            content.addEventListener('transitionend', function handler() {
+                content.style.height = 'auto'; // reset to auto after animation for dynamic content
+                content.removeEventListener('transitionend', handler);
+            });
+            box.classList.add('expanded');
+        }
     });
 });
-
