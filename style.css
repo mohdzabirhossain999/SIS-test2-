@@ -683,14 +683,12 @@ body {
 
 
 .services-grid {
-    padding: 0 2rem;
-    /* Wider padding */
     padding: 0 clamp(1rem, 5vw, 3rem);
-    /* Responsive spacing */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
+    box-sizing: border-box;
 }
 
 .service-card {
@@ -701,6 +699,9 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     text-align: center;
+    /* Changed from center for better readability */
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 .service-card:hover {
@@ -716,14 +717,17 @@ body {
 
 .service-card h3 {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     color: #005f73;
+    line-height: 1.4;
 }
 
 .service-card p {
-    font-size: 0.95rem;
+    font-size: 1rem;
+    line-height: 1.6;
     color: #333;
     margin-bottom: 1rem;
+    text-align: justify;
 }
 
 .expandable-card .toggle-btn {
@@ -731,9 +735,11 @@ body {
     border: none;
     color: #00797a;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1rem;
     cursor: pointer;
     margin-bottom: 1rem;
+    text-align: left;
+    padding: 0;
 }
 
 .expandable-card .extra-content {
@@ -742,14 +748,43 @@ body {
     transition: max-height 0.6s ease, opacity 0.6s ease;
     opacity: 0;
     text-align: left;
+    font-size: 0.95rem;
 }
 
 .expandable-card.expanded .extra-content {
-    max-height: 2000px;
+    max-height: 3000px;
     opacity: 1;
     margin-top: 1rem;
 }
 
+/* Optional Table Style Improvements */
+.extra-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.extra-content table th,
+.extra-content table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+/* ✅ Responsive fix for smaller devices */
+@media (max-width: 600px) {
+    .service-card {
+        padding: 1rem;
+    }
+
+    .service-card h3 {
+        font-size: 1rem;
+    }
+
+    .service-card p,
+    .expandable-card .toggle-btn {
+        font-size: 0.95rem;
+    }
+}
 
 
 
@@ -964,19 +999,9 @@ body {
 
 
 
-.note {
-    margin: 5rem;
-    margin-top: 2rem;
-    background: #eaf4f4;
-    border-left: 4px solid #3aa796;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    color: #222;
-}
-
-
 .about-box {
     margin: 5rem;
+    margin-top: 2rem;
     background: #f0f8f7;
     border-radius: 12px;
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
@@ -1019,15 +1044,25 @@ body {
     color: #78c3b7;
 }
 
-/* About Box Content - Collapsible */
+/* ✅ Fixed collapsible content style */
 .about-box-content {
     max-height: 0;
     padding: 0 1.5rem;
     color: #333;
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.7;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.3s ease;
+    opacity: 0;
+    box-sizing: border-box;
+}
+
+.about-box.expanded .about-box-content {
+    max-height: 2000px;
+    /* Large enough to contain all text */
+    opacity: 1;
+    padding: 0 1.5rem 1.5rem;
+    overflow: visible;
 }
 
 .about-box-content p {
@@ -1041,13 +1076,42 @@ body {
     content: "";
 }
 
-.about-box.expanded .about-box-content {
-    max-height: 1000px;
-    padding: 0 1.5rem 1.5rem;
-    overflow-y: auto;
+/* 📝 Note block style */
+.note {
+    margin: 2rem 5rem;
+    background: #eaf4f4;
+    border-left: 4px solid #3aa796;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #222;
+    padding: 0.5rem;
 }
 
+/* ✅ Mobile fix */
+@media (max-width: 600px) {
 
+    .about-box,
+    .note {
+        margin: 1rem;
+    }
+
+    .about-box-header h3 {
+        font-size: 1.05rem;
+    }
+
+    .toggle-btn {
+        font-size: 0.9rem;
+    }
+
+    .about-box-content {
+        font-size: 0.95rem;
+        padding: 0 1rem;
+    }
+
+    .about-box.expanded .about-box-content {
+        padding: 0 1rem 1rem;
+    }
+}
 
 
 /* Contact Us */
